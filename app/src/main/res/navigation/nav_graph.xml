@@ -7,17 +7,12 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="example.lizardo.pokedexz.FirstFragment"
+        android:name="example.lizardo.pokedexz.presentation.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_first"/>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="example.lizardo.pokedexz.SecondFragment"
+        android:name="example.lizardo.pokedexz.util.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

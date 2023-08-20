@@ -2,4 +2,47 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#FF0000</color>
+
+    <!--Normal Type: A8A77A
+    Fire Type: EE8130
+    Water Type: 6390F0
+    Electric Type: F7D02C
+    Grass Type: 7AC74C
+    Ice Type: 96D9D6
+    Fighting Type: C22E28
+    Poison Type: A33EA1
+    Ground Type: E2BF65
+    Flying Type: A98FF3
+    Psychic Type: F95587
+    Bug Type: A6B91A
+    Rock Type: B6A136
+    Ghost Type: 735797
+    Dragon Type: 6F35FC
+    Dark Type: 705746
+    Steel Type: B7B7CE
+    Fairy Type: D685AD-->
+
+    <color name="normal">#A8A77A</color>
+    <color name="fire">#EE8130</color>
+    <color name="water">#6390F0</color>
+    <color name="electric">#F7D02C</color>
+    <color name="grass">#7AC74C</color>
+    <color name="ice">#96D9D6</color>
+    <color name="figthing">#C22E28</color>
+    <color name="poison">#A33EA1</color>
+    <color name="ground">#E2BF65</color>
+    <color name="flying">#A98FF3</color>
+    <color name="psychic">#F95587</color>
+    <color name="bug">#A6B91A</color>
+    <color name="rock">#B6A136</color>
+    <color name="ghost">#735797</color>
+    <color name="dragon">#6F35FC</color>
+    <color name="dark">#705746</color>
+    <color name="steel">#B7B7CE</color>
+    <color name="fairy">#D685AD</color>
+    <color name="shadow">#555555</color>
+    <color name="unknown">#705746</color>
+
 </resources>
