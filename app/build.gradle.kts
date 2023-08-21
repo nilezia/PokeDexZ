@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
     // kotlin("kapt") version "1.9.0"
 }
 
@@ -54,8 +55,12 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.1.1")
-    implementation("com.google.dagger:dagger:2.46.1")
-    kapt("com.google.dagger:dagger-compiler:2.46.1")
+
+    implementation ("com.google.dagger:hilt-android:2.44")
+    kapt ("com.google.dagger:hilt-android-compiler:2.44")
+
+/*    implementation("com.google.dagger:dagger:2.46.1")
+    kapt("com.google.dagger:dagger-compiler:2.46.1")*/
 
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

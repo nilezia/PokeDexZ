@@ -2,6 +2,8 @@ package example.lizardo.pokedexz.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import example.lizardo.pokedexz.data.api.PokemonApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -11,6 +13,7 @@ import javax.inject.Singleton
 
 
 @Module
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Singleton
     @Provides

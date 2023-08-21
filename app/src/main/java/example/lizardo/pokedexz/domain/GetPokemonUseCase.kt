@@ -15,8 +15,6 @@ import javax.inject.Inject
 interface GetPokemonUseCase {
     fun execute(): Flow<List<Pokemon>>
 }
-
-
 class GetPokemonUseCaseImpl @Inject constructor(
     private var mappingPokemonTypeUseCase: MappingPokemonTypeUseCase,
     private var pokemonRepository: PokemonRepository
