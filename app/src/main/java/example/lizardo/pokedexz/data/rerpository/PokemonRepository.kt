@@ -20,7 +20,11 @@ class PokemonRepositoryImpl @Inject constructor(private var api: PokemonApi) : P
             val response = api.getPokemonList()
             if (response.isSuccessful) {
                 response.body()?.results?.let {
-                    emit(it)
+                    if (it.isNotEmpty()) {
+                        emit(it)
+                    } else {
+                        error("Data is Empty")
+                    }
                 }
             } else {
                 error(response.message())
@@ -40,8 +44,8 @@ class PokemonRepositoryImpl @Inject constructor(private var api: PokemonApi) : P
                 } else {
                     error(response.message())
                 }
-            }catch (e :Exception){
-                Log.d("excep",e.message.toString())
+            } catch (e: Exception) {
+                Log.d("excep", e.message.toString())
             }
 
         }

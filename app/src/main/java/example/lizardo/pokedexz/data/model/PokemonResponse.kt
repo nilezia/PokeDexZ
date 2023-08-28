@@ -8,9 +8,9 @@ data class PokemonResponse(
     @SerializedName("next")
     val next: String? = null,
     @SerializedName("previous")
-    val previous: String,
+    val previous: String? = null,
     @SerializedName("results")
-    val results: List<Pokemon>
+    val results: List<Pokemon>? = null
 ) {
     data class Pokemon(
         @SerializedName("name")

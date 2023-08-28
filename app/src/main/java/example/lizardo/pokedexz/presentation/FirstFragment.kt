@@ -25,7 +25,6 @@ class FirstFragment : Fragment() {
         FragmentFirstBinding.inflate(LayoutInflater.from(context))
     }
 
-
     private val viewModel: FirstFragmentViewModel by viewModels()
 
     private var itemClick: (Pokemon) -> Unit = {
@@ -33,7 +32,7 @@ class FirstFragment : Fragment() {
     }
 
     private var pokemonListAdapter: PokemonListAdapter? = null
-  //  private var lifecycleOwner: LifecycleOwner? = null
+    //  private var lifecycleOwner: LifecycleOwner? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,7 +48,6 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initLifeOwner()
         initViewModel()
         initView()
         viewModel.getPokemon()
@@ -64,16 +62,8 @@ class FirstFragment : Fragment() {
     }
 
     private fun initViewModel() = with(viewModel) {
-        viewLifecycleOwner?.let { _lifecycleOwner ->
-            onUpdatePokemonList.observe(_lifecycleOwner) {
-                pokemonListAdapter?.submitList(it)
-            }
+        onUpdatePokemonList.observe(viewLifecycleOwner) {
+            pokemonListAdapter?.submitList(it)
         }
     }
-
-    fun initLifeOwner() {
-      //  lifecycleOwner = (requireContext() as LifecycleOwner)
-
-    }
-
 }

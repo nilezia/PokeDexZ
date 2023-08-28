@@ -42,6 +42,13 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -72,4 +79,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("io.mockk:mockk:1.13.7")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
 }
