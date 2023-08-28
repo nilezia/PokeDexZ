@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import dagger.hilt.android.AndroidEntryPoint
 import example.lizardo.pokedexz.databinding.FragmentFirstBinding
 import example.lizardo.pokedexz.domain.model.Pokemon
@@ -19,13 +18,13 @@ import example.lizardo.pokedexz.presentation.adapter.PokemonListAdapter
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 @AndroidEntryPoint
-class FirstFragment : Fragment() {
+class HomeFragment : Fragment() {
 
     private val binding: FragmentFirstBinding by lazy {
         FragmentFirstBinding.inflate(LayoutInflater.from(context))
     }
 
-    private val viewModel: FirstFragmentViewModel by viewModels()
+    private val viewModel: HomeFragmentViewModel by viewModels()
 
     private var itemClick: (Pokemon) -> Unit = {
         Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()

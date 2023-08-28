@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FirstFragmentViewModel @Inject constructor(private val getPokemonUseCase: GetPokemonUseCase) :
+class HomeFragmentViewModel @Inject constructor(private val getPokemonUseCase: GetPokemonUseCase) :
     ViewModel() {
 
     val onUpdatePokemonList = MutableLiveData<List<Pokemon>>()
@@ -20,7 +20,6 @@ class FirstFragmentViewModel @Inject constructor(private val getPokemonUseCase: 
         viewModelScope.launch {
             getPokemonUseCase.execute().flowOn(Dispatchers.IO)
                 .collect {
-                    //Log.d("aa", "$it")
                     onUpdatePokemonList.value = it
                 }
         }
