@@ -49,15 +49,15 @@ class PokemonRepositoryTest {
                 )
             )
         )
-        coEvery { api.getPokemonList() } returns Response.success(mockPokemonListData)
+        coEvery { api.getPokemonList(any(), any()) } returns Response.success(mockPokemonListData)
         pokemonRepository.getPokemonList().collect {
-            assert(it.isNotEmpty())
-            assertEquals(it[0].name, "babasur")
-            assertEquals(it[0].url, "com/1")
-            assertEquals(it[1].name, "chalizard")
-            assertEquals(it[1].url, "com/2")
-            assertEquals(it[2].name, "pikachu")
-            assertEquals(it[2].url, "com/3")
+            assertNotNull(it)
+            assertEquals(it.results?.get(0)?.name, "babasur")
+            assertEquals(it.results?.get(0)?.url, "com/1")
+            assertEquals(it.results?.get(1)?.name, "chalizard")
+            assertEquals(it.results?.get(1)?.url, "com/2")
+            assertEquals(it.results?.get(2)?.name, "pikachu")
+            assertEquals(it.results?.get(2)?.url, "com/3")
         }
 
     }
@@ -65,7 +65,7 @@ class PokemonRepositoryTest {
     @Test
     fun test_when_getPokemonList_isEmpty_should_return_error() = runTest {
 
-        coEvery { api.getPokemonList() } returns Response.success(PokemonResponse())
+        coEvery { api.getPokemonList(any(),any()) } returns Response.success(PokemonResponse())
         pokemonRepository.getPokemonList().catch {
             assertEquals("Data is Empty", it.message)
         }
@@ -76,7 +76,7 @@ class PokemonRepositoryTest {
     fun test_when_getPokemonList_unSuccess_should_return_error() = runTest {
 
         val responseBody = "BOOM!".toResponseBody("application/json".toMediaTypeOrNull())
-        coEvery { api.getPokemonList() } returns Response.error(400, responseBody)
+        coEvery { api.getPokemonList(any(), any()) } returns Response.error(400, responseBody)
         pokemonRepository.getPokemonList().catch {
             assertEquals("BOOM!", it.message)
         }

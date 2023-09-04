@@ -1,27 +1,31 @@
 package example.lizardo.pokedexz.data.rerpository
 
-import android.util.Log
-import example.lizardo.pokedexz.data.model.PokemonResponse
 import example.lizardo.pokedexz.data.api.PokemonApi
 import example.lizardo.pokedexz.data.model.PokemonInfoResponse
+import example.lizardo.pokedexz.data.model.PokemonResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 interface PokemonRepository {
-    fun getPokemonList(): Flow<List<PokemonResponse.Pokemon>>
+    fun getPokemonList(offset: String = "0", limit: String = "20"): Flow<PokemonResponse>
 
     fun getPokemonInfo(pokemonId: String): Flow<PokemonInfoResponse>
 }
 
 class PokemonRepositoryImpl @Inject constructor(private var api: PokemonApi) : PokemonRepository {
-    override fun getPokemonList(): Flow<List<PokemonResponse.Pokemon>> {
+    override fun getPokemonList(offset: String, limit: String): Flow<PokemonResponse> {
         return flow {
-            val response = api.getPokemonList()
+            val response = api.getPokemonList(
+                offset = offset,
+                limit = limit
+            )
             if (response.isSuccessful) {
-                response.body()?.results?.let {
-                    if (it.isNotEmpty()) {
-                        emit(it)
+                val pokemonResponse = response.body()
+
+                pokemonResponse?.let { _pokemonResponse ->
+                    if (_pokemonResponse.results?.isNotEmpty() == true) {
+                        emit(_pokemonResponse)
                     } else {
                         error("Data is Empty")
                     }
@@ -35,19 +39,14 @@ class PokemonRepositoryImpl @Inject constructor(private var api: PokemonApi) : P
     override fun getPokemonInfo(pokemonId: String): Flow<PokemonInfoResponse> {
 
         return flow {
-            try {
-                val response = api.getPokemonInfo(pokemonId)
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        emit(it)
-                    }
-                } else {
-                    error(response.message())
+            val response = api.getPokemonInfo(pokemonId)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    emit(it)
                 }
-            } catch (e: Exception) {
-                Log.d("excep", e.message.toString())
+            } else {
+                error(response.message())
             }
-
         }
     }
 }

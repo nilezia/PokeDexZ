@@ -1,4 +1,4 @@
-package example.lizardo.pokedexz.util
+package example.lizardo.pokedexz.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

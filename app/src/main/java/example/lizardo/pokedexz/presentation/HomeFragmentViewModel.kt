@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import example.lizardo.pokedexz.domain.GetPokemonUseCase
 import example.lizardo.pokedexz.domain.model.Pokemon
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,9 +17,26 @@ class HomeFragmentViewModel @Inject constructor(private val getPokemonUseCase: G
     ViewModel() {
 
     val onUpdatePokemonList = MutableLiveData<List<Pokemon>>()
-    fun getPokemon() {
+    val onShowError = MutableLiveData<Unit>()
+    fun getPokemon(isLoadMore: Boolean = false) {
         viewModelScope.launch {
-            getPokemonUseCase.execute().flowOn(Dispatchers.IO)
+            getPokemonUseCase.execute(isLoadMore)
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    onShowError.value = Unit
+                }
+                .collect {
+                    onUpdatePokemonList.value = it
+                }
+        }
+    }
+    fun getPokemonLoadMore(isLoadMore: Boolean = true,next:String ){
+        viewModelScope.launch {
+            getPokemonUseCase.execute(isLoadMore, next)
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    onShowError.value = Unit
+                }
                 .collect {
                     onUpdatePokemonList.value = it
                 }

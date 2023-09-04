@@ -29,7 +29,7 @@ class HomeFragmentViewModelTest {
 
     @Test
     fun test_when_execute_getPokemonUseCase_should_verify_1time() = runTest {
-        coEvery { getPokemonUseCase.execute() } returns flow {
+        coEvery { getPokemonUseCase.execute(any()) } returns flow {
             emit(
                 listOf(
                     Pokemon(
@@ -54,6 +54,6 @@ class HomeFragmentViewModelTest {
             )
         }
         homeFragmentViewModel.getPokemon()
-        coVerify(exactly = 1) { getPokemonUseCase.execute() }
+        coVerify(exactly = 1) { getPokemonUseCase.execute(any()) }
     }
 }

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_first"/>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="example.lizardo.pokedexz.util.SecondFragment"
+        android:name="example.lizardo.pokedexz.presentation.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

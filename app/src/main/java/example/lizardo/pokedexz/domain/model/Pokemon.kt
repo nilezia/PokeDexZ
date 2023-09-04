@@ -6,5 +6,6 @@ data class Pokemon(
     var pokemonId: String = "",
     var name: String = "",
     var image: String = "",
-    var type: String = ""
+    var type: String = "",
+    var next: String = ""
 )

@@ -19,6 +19,12 @@ class PokemonListAdapter(private var itemClick: (Pokemon) -> Unit) :
         val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokemonViewHolder(binding)
     }
+
+    override fun submitList(list: MutableList<Pokemon>?) {
+        val items = currentList.toMutableList()
+        list?.toMutableList()?.let { items.addAll(it) }
+        super.submitList(items)
+    }
 }
 
 class PokemonAdapterDiffUtil : DiffUtil.ItemCallback<Pokemon>() {
@@ -28,7 +34,7 @@ class PokemonAdapterDiffUtil : DiffUtil.ItemCallback<Pokemon>() {
     }
 
     override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-        return oldItem.image == newItem.image
+        return oldItem == newItem
     }
 }
 
